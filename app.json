@@ -1,0 +1,11 @@
+{
+  "name": "moodler",
+  "description": "Get submission remainders right there in your Slack",
+  "keyword": [
+    "slack",
+    "python",
+    "web",
+    "moodler"
+  ],
+  "repository": "https://github.com/ankit96/moodler"
+}

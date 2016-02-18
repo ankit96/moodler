@@ -1,72 +1,74 @@
-
-#Used to make requests
 import requests
 import re
 from bs4 import BeautifulSoup
 
-def main():
-		username = 'ankit.sagwekar'
-		password = 'SPITseit_15'
-		batch='D'
-		URL = 'http://moodle.spit.ac.in/login/index.php'
+def main(text):
 
-		login_data = {
-		        'username': username,
-		        'password': password,
-		        'submit': 'login',
-		    }
+	mylist = text.split(',')
+	username = mylist[0]
+	password = mylist[1]
+	batch=mylist[2].upper()
+	'''
+	username = 'ankit.sagwekar'
+	password = 'SPITseit_15'
+	batch='D'
+	'''
+	URL = 'http://moodle.spit.ac.in/login/index.php'
 
-		s = requests.session()
-		s.post(URL, login_data)
+	login_data = {
+		'username': username,
+		'password': password,
+		'submit': 'login',
+	}
 
-		r= s.get('http://moodle.spit.ac.in/calendar/view.php',timeout=5)
-		paragraphs = re.findall(r'<div class="referer">(.*?)</div><div class="course">(.*?)</div>(.*?)<span class="date">(.*?)</span>',str(r.text))
+	s = requests.session()
+	s.post(URL, login_data)
 
-		#for eachP in paragraphs:
-		soup = BeautifulSoup(str(paragraphs))
+	r= s.get('http://moodle.spit.ac.in/calendar/view.php',timeout=5)
+	soup = BeautifulSoup(str(r.text))
 
 
-		for m in soup.find_all('a'):
-			m.replaceWithChildren()
-		soup = ''.join(soup.findAll(text=True))
-		#print(soup)
+	soup=soup.findAll('table',{"class" : "event"})
+	#print(str(soup))
+	i=0
+	sr=''
+	soup = str(soup).replace("\\n", "")
+	soup = str(soup).replace("\\xa0", "")
+	soup = BeautifulSoup(str(soup))
+	for a in soup.findAll(text=True):
+		if 'AM' in str(a) or 'PM' in str(a) :
+			sr=sr+str(a)
+		else:
+			sr=sr+'\n'+str(a)
+	sr=sr.replace(',',' ')
+	sr=sr.replace('[',' ')
+	sr=sr.replace(']',' ')
 
-		x=[]
-		arr = []
-		arr.append([])
-		i=0
-		soup = soup.split("'") 
-		for m in soup:
-			if len(str(m))>3 and m[0] != ')':
-				 x.append(str(m))
-				
-		#print(str(x))
 
-		for p in x:
-			arr[i].append(str(p))
-			if str(p).find('AM')!=-1 or str(p).find('PM')!=-1 :
-				i=i+1
-				arr.append([])
-		j=i
-		return arr
-		'''for a in arr:
-			for b in a:
-				print(str(b))
-			print("")
-			print("")
-			print("")
+	flag=1
+	pr=0
+	final=''
+	rbatch=''
+	for line in sr.splitlines():
+			if len(str(line))<3:
+				final=final+str(line)+str(line)
+				flag=1
+				pr=0
+				#print('flag='+str(flag))
+			else:
+				if flag==1:
+					if 'Batch' in line :
+						rbatch=line.replace('Batch','')
+						rbatch=rbatch.replace('Exp','')
+						if batch in rbatch:
+							pr=1
+							#print "made pr=1"
+						else:
+							pr=0
 
-		flag=0
-
-		y=[]
-		i=0
-		for a in arr:
-			flag=0
-			for b in a:
-				if str(b).find('Batch')!=-1:
-					flag=1
-			if flag==0 and i+1<=j:
-				y.append(int(i+1))
-			i=i+1
-		print(y)
-		'''
+					else:
+						pr=1
+					flag=0
+				if pr==1:
+					final=final+'\n'+str(line)
+	return str(final)
