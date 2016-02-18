@@ -16,17 +16,12 @@ def moodler():
 
     text = request.values.get('text')
     data = main(str(text))
-    #data = main()
-    #time.sleep(25)
-
-    #print(str(data))
     return Response(str(data),content_type="text/plain; charset=utf-8" )
 
 @app.route('/')
 def hello():
     return redirect('https://github.com/ankit96/moodler')
 
-#moodler()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))

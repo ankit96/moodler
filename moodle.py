@@ -8,11 +8,6 @@ def main(text):
 	username = mylist[0]
 	password = mylist[1]
 	batch=mylist[2].upper()
-	'''
-	username = 'ankit.sagwekar'
-	password = 'SPITseit_15'
-	batch='D'
-	'''
 	URL = 'http://moodle.spit.ac.in/login/index.php'
 
 	login_data = {
@@ -29,7 +24,6 @@ def main(text):
 
 
 	soup=soup.findAll('table',{"class" : "event"})
-	#print(str(soup))
 	i=0
 	sr=''
 	soup = str(soup).replace("\\n", "")
@@ -54,7 +48,7 @@ def main(text):
 				final=final+str(line)+str(line)
 				flag=1
 				pr=0
-				#print('flag='+str(flag))
+
 			else:
 				if flag==1:
 					if 'Batch' in line :
@@ -62,7 +56,7 @@ def main(text):
 						rbatch=rbatch.replace('Exp','')
 						if batch in rbatch:
 							pr=1
-							#print "made pr=1"
+
 						else:
 							pr=0
 
