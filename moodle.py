@@ -9,11 +9,7 @@ def main(text):
     username = mylist[0]
     password = mylist[1]
     batch=mylist[2].upper()
-    '''
-    username = 'ankit.sagwekar'
-    password = 'SPITseit_15'
-    batch = 'D'
-	'''
+
     URL = 'http://moodle.spit.ac.in/login/index.php'
 
     login_data = {
@@ -26,12 +22,11 @@ def main(text):
     s.post(URL, login_data)
 
     r = s.get('http://moodle.spit.ac.in/calendar/view.php', timeout=5)
-    #print(str(r.text))
 
     soup = BeautifulSoup((r.text).encode('utf-8'))
 
     soup = soup.findAll('table', {"class": "event"})
-    # print(str(soup))
+
     i = 0
     sr = ''
     soup = str(soup).replace("\\n", "")
@@ -56,30 +51,25 @@ def main(text):
             final = final + str(line) + str(line)
             flag = 1
             pr = 0
-        # print('flag='+str(flag))
+
         else:
 
             if flag == 1:
-                #print line
+
                 if 'Batch' in line or 'batch' in line:
                     rbatch = line.replace('-', ' ')
                     rbatch = rbatch.replace('.', ' ')
-                    '''
-                    rbatch = rbatch.replace('Batch', '')
-                    rbatch = rbatch.replace('Exp', '')
-                    rbatch = rbatch.replace('Expt', '')
-                    rbatch = rbatch.replace('Practical', '')
-                    '''
+
                     wordList = re.sub("[^\w]", " ",  rbatch).split()
-                    #print("-------------------------------")
+                    
                     for a in wordList:
-                        #print(str(a))
+                        
                         if len(a)==1:
-                            if batch in a:
+                            if batch in a or a in batch:
                                 pr = 1
-                                #print("This is shit" +str(batch)+"  "+str(rbatch))
+                                
                                 final = final + '\n -------------------------------------------------------\n'
-                            # print "made pr=1"
+                            
                             else:
                                 pr = 0
 
@@ -90,7 +80,7 @@ def main(text):
             if pr == 1:
                 final = final + '\n' + str(line)
     return str(final)
-    #print str(final)
+    
 
 
 
