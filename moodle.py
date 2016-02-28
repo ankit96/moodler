@@ -9,7 +9,7 @@ def main(text):
     username = mylist[0]
     password = mylist[1]
     batch=mylist[2].upper()
-
+   
     URL = 'http://moodle.spit.ac.in/login/index.php'
 
     login_data = {
@@ -22,11 +22,12 @@ def main(text):
     s.post(URL, login_data)
 
     r = s.get('http://moodle.spit.ac.in/calendar/view.php', timeout=5)
+    
 
     soup = BeautifulSoup((r.text).encode('utf-8'))
 
     soup = soup.findAll('table', {"class": "event"})
-
+    
     i = 0
     sr = ''
     soup = str(soup).replace("\\n", "")
@@ -51,19 +52,19 @@ def main(text):
             final = final + str(line) + str(line)
             flag = 1
             pr = 0
-
+        # print('flag='+str(flag))
         else:
 
             if flag == 1:
-
+                #print line
                 if 'Batch' in line or 'batch' in line:
                     rbatch = line.replace('-', ' ')
                     rbatch = rbatch.replace('.', ' ')
-
+                   
                     wordList = re.sub("[^\w]", " ",  rbatch).split()
                     
                     for a in wordList:
-                        
+                       
                         if len(a)==1:
                             if batch in a or a in batch:
                                 pr = 1
@@ -80,7 +81,7 @@ def main(text):
             if pr == 1:
                 final = final + '\n' + str(line)
     return str(final)
-    
+   
 
 
 

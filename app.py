@@ -16,9 +16,12 @@ app = Flask(__name__)
 def moodler():
 
     text = request.values.get('text')
-    
+    user_name = request.values.get('user_name')
+    user_id = request.values.get('user_id')
     data = main(str(text))
     
+    data = "<@"+str(user_id)+'|'+str(user_name)+'>'+':Your comming submission deadlines'+'\n'+str(data)
+ 
     return Response(str(data),content_type="text/plain; charset=utf-8" )
 
 
@@ -33,18 +36,16 @@ def setmoodler():
     user_name = request.values.get('user_name')
     text = request.values.get('text')
 
-
     st=str(team_domain)+'%'+str(team_id)+'%'+str(channel_id)+'%'+str(channel_name)+'%'+str(user_id)+'%'+str(user_name)+'%'+str(text)
-
+   
     data= set(str(st))
-
+    
     return Response(str(data),content_type="text/plain; charset=utf-8" )
 
 
 @app.route('/')
 def hello():
     return redirect('https://github.com/ankit96/moodler')
-
 
 
 if __name__ == '__main__':
