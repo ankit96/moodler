@@ -7,11 +7,11 @@ import urlparse
 def set(string):
 
     conn = psycopg2.connect(
-        database='dbsq99cd6govf2',
-        user='aoqfgpcbnlwuat',
-        password='FSm2OLpubzgXYM_bSNv3PzYHaD',
-        host='ec2-107-20-153-141.compute-1.amazonaws.com',
-        port='5432'
+        database='dc',
+        user='s a',
+        password='sc',
+        host='s ',
+        port='23'
 
     )
 
