@@ -16,5 +16,3 @@ sqlparse==0.1.13
 urllib3==1.11
 virtualenv==1.11.6
 APScheduler==3.0.0
-pygeocoder
-pycrypto
