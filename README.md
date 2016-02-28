@@ -17,16 +17,14 @@ Moodler the bot is here to avoid anymore overdue submissions for you
       
 
 ##### /setmoodle
-- from a private channel in which you are the only member type `/setmoodle [username][password][batch][channel name]`.Your data will get stored in
+- from any channel type `/setmoodle [username][password][batch]`.Your data will get stored in
 our  database and automatic daily reminders will be posted in this channel.
-- eg : /setmoodle ankituser,ankitpass,D,#moodle<br />
+- eg : /setmoodle ankituser,ankitpass,D<br />
       here,<br />
       username=ankituser<br />
       password=ankitpass<br />
       batch = D<br />
-      private channel name= #moodle<br />
-- Note: #moodle is the private channel which i created for myself and no other member is present except me
-- Likewise you need to create your own private channel 
+- Note: password is being encrypted before inserting into database
 
 
 ## Integrate it with your team
@@ -53,7 +51,7 @@ our  database and automatic daily reminders will be posted in this channel.
        - method: `POST`
        - For the **Autocomplete help text**, check to show the command in autocomplete list.
        - Description: `Saves your data for automatic reminders.`
-       - Usage Hint: `[username][password][batch][channel]`.
+       - Usage Hint: `[username][password][batch]`.
 
 
 ##Note: /spitmoodle command
@@ -62,8 +60,9 @@ our  database and automatic daily reminders will be posted in this channel.
  users who will provide us with  their login data will recieve automatic reminders everyday about 
  their future submission deadlines.
  
-- Also after integrating /spitmoodle command ,users are adviced to use this command only once in a seperate **Private** channel which they 
-need to create for moodle reminders only.Everyday reminders will be posted on that specific channel.
+- Also after integrating /spitmoodle command ,users are adviced to use this command only once .Everyday reminders will be posted on the intended user's slackbot DM which other users cant see.
+
+- Also moodlers reply for /moodle command would be visible to only the intended user 
 
 
 ## Contributing
