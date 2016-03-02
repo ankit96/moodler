@@ -6,9 +6,9 @@ Moodler the bot is here to avoid anymore overdue submissions for you
 
 
 ## Usage
-
+###You can go through this [`post`](https://medium.com/@ankit15/moodler-4138a99e045c#.2ae9tsh81)
 ##### /moodle
-- from any slack channel just type `/moodle [username][password][batch]`. All your comming submission deadlines would be displayed.
+- from any slack channel just type `/moodle [username],[password],[batch]`. All your comming submission deadlines would be displayed.
 - eg : /moodle ankituser,ankitpass,D<br />
       here,<br />
       username=ankituser<br />
@@ -17,7 +17,7 @@ Moodler the bot is here to avoid anymore overdue submissions for you
       
 
 ##### /setmoodle
-- from any channel type `/setmoodle [username][password][batch]`.Your data will get stored in
+- from any channel type `/setmoodle [username],[password],[batch]`.Your data will get stored in
 our  database and automatic daily reminders will be posted in this channel.
 - eg : /setmoodle ankituser,ankitpass,D<br />
       here,<br />
@@ -26,6 +26,15 @@ our  database and automatic daily reminders will be posted in this channel.
       batch = D<br />
 - Note: password is being encrypted before inserting into database
 
+
+##### /deletemoodle
+- from any channel type `/deletemoodle `.Your data will get removed from
+our  database .
+- eg : /deletemoodle<br />
+      here,<br />
+      username=ankituser<br />
+      password=ankitpass<br />
+      batch = D<br />
 
 ## Integrate it with your team
 
@@ -52,18 +61,15 @@ our  database and automatic daily reminders will be posted in this channel.
        - For the **Autocomplete help text**, check to show the command in autocomplete list.
        - Description: `Saves your data for automatic reminders.`
        - Usage Hint: `[username][password][batch]`.
-
-
-##Note: /spitmoodle command
-
-- It is not mandatory,but integrating this command would allow you to store your login data with us.All those
- users who will provide us with  their login data will recieve automatic reminders everyday about 
- their future submission deadlines.
- 
-- Also after integrating /spitmoodle command ,users are adviced to use this command only once .Everyday reminders will be posted on the intended user's slackbot DM which other users cant see.
-
-- Also moodlers reply for /moodle command would be visible to only the intended user 
-
+   3. For deleting your login data from moodlers tb
+   
+       - Command: `/deletemoodle`
+       - URL: `https://spitmoodler.herokuapp.com/deletemoodle`
+       - method: `POST`
+       - For the **Autocomplete help text**, check to show the command in autocomplete list.
+       - Description: `deletes your login data.`
+       - Usage Hint: 
+       
 
 ## Contributing
 - Please use the [issue tracker](https://github.com/ankit96/moodler/issues) to report any bugs or file feature requests.
