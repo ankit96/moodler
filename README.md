@@ -31,10 +31,7 @@ our  database and automatic daily reminders will be posted in this channel.
 - from any channel type `/deletemoodle `.Your data will get removed from
 our  database .
 - eg : /deletemoodle<br />
-      here,<br />
-      username=ankituser<br />
-      password=ankitpass<br />
-      batch = D<br />
+
 
 ## Integrate it with your team
 
